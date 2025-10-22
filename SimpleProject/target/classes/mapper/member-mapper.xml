@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace ="memberMapper">
+  
+  	<select id="login" resultType="com.kh.spring.member.model.dto.MemberDTO">
+  	<!-- 이거 이제 못씀 왜냐하면 사용자는 비밀번호를 평문으로 입력하지만 DB컬럼에는 암호문이 들어있기때문에
+  	비밀번호를 비교하는 select문은 사용할 수 없음  때문에 비밀번호를 주석처리하고 아이디만 가지고 검색을 할꺼임
+  	근데 이러면 비밀번호를 몰라도 로그인이 가능해짐-->
+  			SELECT
+  			        USER_ID userId
+  			      , USER_PWD userPwd
+  			      , USER_NAME userName
+  			      , EMAIL email
+  			      , ENROLL_DATE enrollDate
+  			   FROM
+  			        MEMBER
+  			  WHERE
+  			        USER_ID = #{userId}
+  			   <!--  
+  			   AND
+  			        USER_PWD = #{userPwd}
+  			   -->
+  </select>
+  <insert id="signUp"
+  		   parameterType="com.kh.spring.member.model.dto.MemberDTO">
+  		   	INSERT
+  		   	  INTO
+  		   	       MEMBER
+  		   	 VALUES
+  		   	 		(
+  		   	 		#{userId}
+  		   	      , #{userPwd}
+  		   	      , #{userName}
+  		   	      , #{email}
+  		   	      , SYSDATE
+  		   	 		)
+  </insert>
+  			
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  		
+  		
+  
+  
+  </mapper>
