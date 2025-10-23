@@ -43,32 +43,42 @@
             <table id="contentArea" algin="center" class="table">
                 <tr>
                     <th width="100">제목</th>
-                    <td colspan="3">제목입니다요</td>
+                    <td colspan="3">${ board.boardTitle }</td>
                 </tr>
                 <tr>
                     <th>작성자</th>
-                    <td>admin</td>
+                    <td>${board.boardWriter}</td>
                     <th>작성일</th>
-                    <td>2025-09-07</td>
+                    <td>${board.createDate}</td>
                 </tr>
                 <tr>
                     <th>첨부파일</th>
+                    <c:choose>
+ 					<c:when test="${not empty board.changeName }">
+ 					
                     <td colspan="3">
-                        <a href="" download="">파일명.jpg</a>
+                        <a href="${board.changeName }" download="${board.changeName }">${board.originName}</a>
+                        <img src="${board.changeName}"/>
                     </td>
-                </tr>
+ 					</c:when>
+ 					<c:otherwise>
+                </c:otherwise>
+                                    </c:choose>
+	                </tr>
                 <tr>
                     <th>내용</th>
                     <td colspan="3"></td>
                 </tr>
                 <tr>
-                    <td colspan="4"><p style="height:150px;">게시판 내용이 들어갈 자리!!</p></td>
+                    <td colspan="4"><p style="height:150px;">${ board.boardContent}</p></td>
                 </tr>
+                
             </table>
             <br>
 
             <div align="center">
                 <!-- 수정하기, 삭제하기 버튼은 이 글이 본인이 작성한 글일 경우에만 보여져야 함 -->
+
                 <a class="btn btn-primary" href="">수정하기</a>
                 <a class="btn btn-danger" href="">취소하기</a>
             </div>
@@ -83,25 +93,36 @@
                         <th style="vertical-align:middle"><button class="btn btn-secondary">등록하기</button></th> 
                     </tr>
                     <tr>
+                    
                         <td colspan="3">댓글(<span id="rcount">3</span>)</td>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <th>user02</th>
-                        <td>ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ</td>
-                        <td>2025-09-12</td>
-                    </tr>
-                    <tr>
-                        <th>user01</th>
-                        <td>재밌어요</td>
-                        <td>2025-09-11</td>
-                    </tr>
-                    <tr>
-                        <th>admin</th>
-                        <td>댓글입니다!!</td>
-                        <td>2025-09-10</td>
-                    </tr>
+                
+                	<c:choose>
+                	<c:when test="${not empty board.replies }">
+                	<c:forEach items="${board.replies }" var="reply">
+                	<tr>
+                		<th>${reply.replyWriter }</th>
+                		<td>${reply.replyContent }</td>
+                		<td>${reply.createDate }</td>
+                	</tr>
+                		
+                		
+                	
+                	</c:forEach>
+                	</c:when>
+					<c:otherwise>
+                   <tr>
+                		<th colspan="3">댓글없음 ㅉㅉ</th>
+                	</tr>
+					
+					</c:otherwise>                	
+					
+                	
+                	</c:choose>
+                	
+                    
                 </tbody>
             </table>
         </div>

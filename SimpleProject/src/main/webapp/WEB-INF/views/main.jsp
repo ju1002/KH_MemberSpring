@@ -24,8 +24,8 @@
 		* 사진게시판 서비스
 		사진게시글 목록조회(이미지), 상세조회, 게시글 작성(다중 파일 업로드)
 	 -->
-    <jsp:include page="WEB-INF/views/include/header.jsp" />
-    <jsp:include page="WEB-INF/views/include/main.jsp" />
-    <jsp:include page="WEB-INF/views/include/footer.jsp" />
+    <jsp:include page="include/header.jsp" />
+   
+    <jsp:include page="include/footer.jsp" />
   </body>
 </html>
